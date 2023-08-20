@@ -10,9 +10,13 @@ The skin requires two components: the **user style**, and the **user script**. K
    - If you are using **Firefox**, you want to get Greasemonkey
    - If you are using a **Chromium based browser** (Chrome, Opera, etc.), you want to get Tampermonkey
 3. Install the user style AND user script
-   - This can be done easily by simply clicking the following links. Stylus and Tampermonkey will automatically open up the file in an installation window.
+   - This can be done easily by simply clicking the following links. Stylus and Grease/Tampermonkey will automatically open up the file in an installation window.
    - User Style: https://github.com/deaathtraap/Retro-FA-Skin/raw/main/Retro_FA_Beta.user.css
    - User Script: https://github.com/deaathtraap/Retro-FA-Skin/raw/main/Retro%20FA%20Userscript.user.js
+
+# Additional Notes
+- This style is in beta and _does_ have issues.
+- Stylus and Grease/Tampermonkey should automatically check for updates to these files whenever I change them. If not, you can simply redo step 3.
 
 Have fun!
 Created by Deaathtraap (https://www.furaffinity.net/user/deaathtraap)
