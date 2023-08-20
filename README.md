@@ -1,4 +1,4 @@
-# Retro-FA-Skin
+# Retro FA Skin
 This is a skin for Furaffinity that makes it look closer to 2000's-early 2010's websites like DeviantArt and Nitrome.
 
 The skin requires two components: the **user style**, and the **user script**. Keep reading for installation instructions.
