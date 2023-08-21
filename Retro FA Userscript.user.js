@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Retro FA Userscript
 // @namespace    furaffinity.net/user/deaathraap
-// @version      1.0
+// @version      1.1
 // @description  For use in conjunction with the Retro FA theme.
 // @match        https://www.furaffinity.net/*
 // @grant        none
@@ -114,6 +114,47 @@
             }
         });
     }
+
+    // Function to apply styles based on image dimensions
+    function applyStylesToImage(imageElement) {
+        const imageWidth = imageElement.naturalWidth;
+        const imageHeight = imageElement.naturalHeight;
+
+        if (imageHeight > imageWidth) {
+            imageElement.style.maxHeight = "unset";
+            imageElement.style.maxWidth = "95%";
+
+            imageElement.style.marginTop = "0";
+        } else {
+            imageElement.style.maxHeight = "95%";
+            imageElement.style.maxWidth = "unset";
+        }
+    }
+
+    // Function to be executed when a .lightbox element is created
+    function handleLightboxCreation(element) {
+        const imageElement = element.querySelector('.lightbox img');
+        if (imageElement) {
+            applyStylesToImage(imageElement);
+        }
+    }
+
+    // Create a MutationObserver to watch for changes in the DOM
+    const observer = new MutationObserver((mutationsList, observer) => {
+        for (const mutation of mutationsList) {
+            // Check if a new node was added
+            if (mutation.type === 'childList') {
+                // Check if the added node matches the selector .lightbox
+                const addedLightboxes = Array.from(mutation.addedNodes).filter(node => node.matches && node.matches('.lightbox'));
+                for (const lightbox of addedLightboxes) {
+                    handleLightboxCreation(lightbox);
+                }
+            }
+        }
+    });
+
+    // Start observing the DOM for changes
+    observer.observe(document.body, { childList: true, subtree: true });
 
     // Call the functions with your desired parameters
     removeLastLetterFromNotifications();

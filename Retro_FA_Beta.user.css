@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Retro FA Beta
 @namespace      furaffinity.net/user/deaathtraap
-@version        0.1.1
+@version        0.1.2
 @description    A total FA style overhaul.
 @author         Deaathtraap
 ==/UserStyle== */
@@ -337,6 +337,7 @@
 
         box-shadow: none;
         overflow: visible !important;
+        overflow-x: hidden !important;
     }
 
     .textarea:focus {
@@ -561,6 +562,11 @@
             position: sticky;
         }
     }
+    @media screen and (max-width: 999px) {
+        #main-window {
+            padding-top: 50px;
+        }
+    }
 
     .section-submission,
     .submission-preview,
@@ -599,13 +605,14 @@
 @-moz-document domain("furaffinity.net") {
     /* Buttons */
     .align-options-header.section_controls > button,
-    .align-options-header.global_controls > button {
+    .align-options-header.global_controls > button,
+    #pageid-submission .submission-sidebar .buttons div {
         border: none;
         border-radius: var(--section-rounding);
 
         margin: 0px 0px 0px 4px !important;
 
-        background-color: var(--body-color);
+        background: var(--body-color);
 
         color: var(--header-color) !important;
         font-weight: bold;
@@ -615,12 +622,18 @@
         transition-duration: .2s;
     }
     .align-options-header.section_controls > button:hover,
-    .align-options-header.global_controls > button:hover {
+    .align-options-header.global_controls > button:hover,
+    #pageid-submission .submission-sidebar .buttons div:hover {
+        background: var(--body-color) !important;
+        
         transform: translateY(-3px) rotate(-1deg);
         box-shadow: 0px 4px 0px 0px var(--inner-shadow-color);
     }
     .align-options-header.section_controls > button:active,
-    .align-options-header.global_controls > button:active {
+    .align-options-header.global_controls > button:active,
+    #pageid-submission .submission-sidebar .buttons div:active {
+        background: var(--body-color);
+        
         transition-duration: 0s;
         transform: translateY(2px) rotate(2deg);
         box-shadow: 0px 0px 0px 0px var(--inner-shadow-color);
@@ -639,6 +652,82 @@
     }
     button.nuke .svg-icon {
         fill: #ff6363 !important;
+    }
+    
+    /* Sidebar buttons */
+    #columnpage .submission-sidebar {
+        background: none;
+        padding: 0;
+        box-shadow: none;
+    }
+    #columnpage .submission-sidebar section {
+        padding: 10px;
+        background: var(--body-color);
+    }
+    .submission-sidebar .buttons {
+        background: none;
+        width: unset !important;
+    }
+    #pageid-submission .submission-sidebar .buttons div {
+        background: var(--header-color);
+    }
+    #pageid-submission .submission-sidebar .buttons div a {
+        color: var(--header-text-color) !important;
+    }
+    #pageid-submission .submission-sidebar .buttons div a:hover {
+        color: var(--header-color) !important;
+        transition-duration: .2s;
+    }
+    
+    /* Sidebar tags */
+    .tags-row {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    
+    .tags {
+        padding: 0;
+        
+        z-index: 10;
+        
+        padding-left: 10px;
+        padding-right: 8px;
+        
+        transition-duration: .2s;
+        
+        position: relative;
+    }
+    .tags:hover {
+        transform: translate(0, -2px) rotate(-3deg) !important;
+        transform-origin: left;
+    }
+    .tags a {
+        border-radius: 4px;
+        border: none;
+        
+        background: var(--header-color);
+        
+        color: var(--header-text-color) !important;
+    }
+    
+    .tags:before {
+        font-family: "Font Awesome 5 Free";
+        content: "\f02b";
+        margin-left: 4px;
+        font-weight: 900;
+        color: var(--header-color);
+        
+        font-size: 43.4px;
+        
+        position: absolute;
+        
+        transform: translate(-12px, -5.2px) rotate(-45deg);
+        
+        z-index: -1;
+    }
+    
+    .tags a:hover {
+        background: var(--header-color);
     }
 }
 
@@ -772,3 +861,74 @@
         margin-top: 0;
     }
 }
+
+@-moz-document domain("furaffinity.net") {
+    /* Main page gallery */
+    section.gallery b figcaption {
+        top: auto;
+        bottom: 0;
+        
+        height: fit-content;
+        
+        background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0.72) 66%,rgba(0,0,0,0.9) 100%);
+    }
+    
+    section.gallery b figcaption p a,
+    section.gallery b figcaption p i {
+        color: white !important;
+    }
+    
+    section.gallery b figcaption p:first-of-type a {
+        font-size: 18px;
+    }
+    
+    section.gallery b figcaption p:first-of-type {
+        margin-top: 30px;
+    }
+    
+    section.gallery b figcaption p {
+        text-align: left;
+        margin: 0;
+        overflow: visible !important;
+        height: fit-content;
+        
+        max-height: unset !important;
+    }
+    
+    section.gallery b figcaption {
+        padding: 8px;
+    }
+    
+    section.gallery b u a img:hover {
+        -webkit-filter: none;
+        filter: none;
+    }
+}
+
+@-moz-document domain("furaffinity.net") {
+    /* Lightbox */
+    .lightbox {
+        overflow: auto;
+    }
+    
+    .lightbox img {
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
