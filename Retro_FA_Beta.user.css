@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Retro FA Beta
 @namespace      furaffinity.net/user/deaathtraap
-@version        0.1.0
+@version        0.1.1
 @description    A total FA style overhaul.
 @author         Deaathtraap
 ==/UserStyle== */
@@ -362,10 +362,10 @@
     }
 
     /* Message Center */
-    #messages-form section:last-child > .section-body {
+    #messages-form > section:last-child > .section-body {
         display: none !important;
     }
-    #messages-form section:last-child > .section-header {
+    #messages-form > section:last-child > .section-header {
         border-radius: var(--section-rounding);
         background-color: var(--subheader-color) !important;
     }
