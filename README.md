@@ -14,9 +14,17 @@ The skin requires two components: the **user style**, and the **user script**. K
    - User Style: https://github.com/deaathtraap/Retro-FA-Skin/raw/main/Retro_FA_Beta.user.css
    - User Script: https://github.com/deaathtraap/Retro-FA-Skin/raw/main/Retro%20FA%20Userscript.user.js
 
-# Additional Notes
+## Additional Notes
 - This style is in beta and _does_ have issues.
 - Stylus and Grease/Tampermonkey should automatically check for updates to these files whenever I change them. If not, you can simply redo step 3.
 
 Have fun!
 Created by Deaathtraap (https://www.furaffinity.net/user/deaathtraap)
+
+# Bonus Features
+These are extra fixes and features for FA that I created, which aren't directly related to the retheme (but work with it).
+## PDF Viewer
+Embeds PDF files directly into the page on written submissions.
+### Installation
+1. Follow the [Greasemonkey/Tampermonkey installation instructions](#Installation) above
+2. Click this link to install the script: https://github.com/deaathtraap/Retro-FA-Skin/raw/main/features/FA%20PDF%20Embed.user.js
