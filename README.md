@@ -36,5 +36,5 @@ These are extra fixes and features for FA that I created, which aren't directly 
 ## PDF Viewer
 Embeds PDF files directly into the page on written submissions.
 ### Installation
-1. Follow the [Greasemonkey/Tampermonkey installation instructions](#Installation) above
+1. Follow the [Greasemonkey/Tampermonkey installation instructions](#-Installation) above
 2. Click this link to install the script: https://github.com/deaathtraap/Retro-FA-Skin/raw/main/features/FA%20PDF%20Embed.user.js
