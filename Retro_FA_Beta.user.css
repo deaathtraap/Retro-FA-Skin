@@ -1,33 +1,41 @@
 /* ==UserStyle==
 @name           Retro FA Beta
 @namespace      furaffinity.net/user/deaathtraap
-@version        0.1.2
+@version        1.3.0
 @description    A total FA style overhaul.
 @author         Deaathtraap
+@preprocessor   stylus
+
+@var    color       accentColor "Accent Color"      #E99C20
+@var    checkbox    darkMode    "Dark Mode"         0
+@var    text        bgImg       "Background Image"  "'https://www.nitrome.com/generated-content/images/icebreakerupdate/tile.png'"
 ==/UserStyle== */
-@import url('https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Karla&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
-@-moz-document domain("furaffinity.net") {
+@import url('https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap')
+@import url('https://fonts.googleapis.com/css2?family=Karla&display=swap')
+@import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap')
+@-moz-document domain("www.furaffinity.net") {
     /* Styling the notification container */
     :root {
-        --header-color: #E99C20;
+        --header-color: accentColor;
         --header-highlight: #ffdda6;
 
         --header-text-color: white;
         --a-color: black;
 
+        /* Regular Colors */
         --main-text-color: #4d4d4d;
-        --main-text-color-darkmode: #e6e6e6;
-
         --body-color: white;
-        --body-color-darkmode: #2b2b2b;
-
         --body-layer: #e3e3e3;
-        --body-layer-darkmode: #4d4d4d;
-
         --subheader-color: #2b2b2b;
+
+        /* Dark Mode Colors */
+        --main-text-color-darkmode: #e6e6e6;
+        --body-color-darkmode: #2b2b2b;
+        --body-layer-darkmode: #4d4d4d;
         --subheader-color-darkmode: #202020;
+
+        /* --background-image: url('https://www.nitrome.com/generated-content/images/icebreakerupdate/tile.png'); */
+        --background-image: url(bgImg);
 
         --inner-shadow-color: rgba(0, 0, 0, 0.35);
         --shadow-distance: -4px 4px;
@@ -43,6 +51,20 @@
         --col-not: #70eae5;
 
         --section-rounding: 4px;
+    }
+    if darkMode {
+        :root {
+            /* Apply Dark Mode Colors */
+            --main-text-color: var(--main-text-color-darkmode);
+            --body-color: var(--body-color-darkmode);
+            --body-layer: var(--body-layer-darkmode);
+            --subheader-color: var(--subheader-color-darkmode);
+            }
+        if bgImg == 'https://www.nitrome.com/generated-content/images/icebreakerupdate/tile.png' {
+            :root {
+                --background-image: url('https://www.nitrome.com/generated-content/images/dittoskin/tile.png');
+            }
+        }
     }
 
     .notification-container {
@@ -62,11 +84,13 @@
         text-decoration: none !important;
         /* Remove underline */
         box-shadow: inset 0px 0px 0px 0px var(--inner-shadow-color);
-        transition-duration: .2s;
         text-shadow: var(--inner-shadow-color) 0px 2px 0px;
         margin-top: 5px;
 
         padding: 0 4px;
+        
+        transition-duration: .4s;
+        transition-timing-function: cubic-bezier(0.300, 1.650, 0.650, 0.940);
     }
 
     /* Optional hover effect */
@@ -75,6 +99,13 @@
         box-shadow: inset 0px -3px 0px 0px var(--inner-shadow-color);
         height: 39px;
         text-shadow: var(--inner-shadow-color) 0px 2px 0px !important;
+        color: white !important;
+    }
+    .notification-container:active {
+        transform: translateY(0);
+        box-shadow: inset 0px 3px 0px 0px var(--inner-shadow-color);
+        height: 36px;
+        transition-duration: .1s;
     }
 
     #ddmenu .message-bar-desktop {
@@ -139,7 +170,7 @@
     }
 }
 
-@-moz-document domain("furaffinity.net") {
+@-moz-document domain("www.furaffinity.net") {
     /* Styling the header */
     .top-heading {
         font-family: var(--font-title);
@@ -176,7 +207,8 @@
 
         box-shadow: inset 0px 4px 0px 0px var(--inner-shadow-color);
 
-        transition-duration: .2s;
+        transition-duration: .3s;
+        transition-timing-function: cubic-bezier(0.300, 1.650, 0.650, 0.940);
     }
     #searchbox input[type=search]:focus {
         background-color: var(--inner-shadow-color);
@@ -193,12 +225,16 @@
     }
 }
 
-@-moz-document domain("furaffinity.net") {
+@-moz-document domain("www.furaffinity.net") {
     /* Styling fonts */
     h2 {
         font-family: var(--font-title);
         color: var(--header-text-color);
         text-shadow: var(--inner-shadow-color) 0px 2px 0px !important;
+    }
+    .latest-journals h2 {
+        color: var(--header-color);
+        text-shadow: none !important;
     }
 
     h2 a {
@@ -239,6 +275,13 @@
     a {
         color: var(--main-text-color) !important;
         font-weight: bold;
+        
+        transition-duration: .1s;
+        
+        box-shadow: inset 0 0 0 var(--header-color);
+    }
+    a:hover {
+        color: var(--header-color) !important;
     }
 
     .user-submitted-links a {
@@ -266,7 +309,33 @@
         font-family: 'Karla', sans-serif;
         font-size: 12px;
     }
-
+    
+    /* Links */
+    section.minigallery-more h3 {
+        color: var(--main-text-color) !important;
+    }
+    section.minigallery-more h3 a,
+    .user-submitted-links a,
+    .page-controls-journal-links.bgtrans a,
+    li.page-controls-journal-links strong a {
+        color: var(--header-color) !important;
+        box-shadow: inset 0px 0px 0px 0px var(--header-color);
+        
+        transition-duration: .1s;
+    }
+    section.minigallery-more h3 a:hover,
+    .user-submitted-links a:hover,
+    .page-controls-journal-links.bgtrans a:hover,
+    li.page-controls-journal-links strong a:hover,
+    comment-username a:hover {
+        color: var(--header-color) !important;
+        box-shadow: inset 0px -3px 0px var(--header-color);
+        
+        font-weight: bold !important;
+        
+        transition-duration: .1s;
+    }
+    
     html,
     body,
     button,
@@ -283,7 +352,7 @@
     }
 }
 
-@-moz-document domain("furaffinity.net") {
+@-moz-document domain("www.furaffinity.net") {
     /* Styling gallery */
     section.gallery figure.r-general u > a,
     section.gallery figure.r-mature u > a,
@@ -306,14 +375,16 @@
 
         transform: translateY(-7px) rotate(-1deg);
 
-        transition-duration: .2s;
+        transition-duration: .4s;
+        transition-timing-function: cubic-bezier(0.300, 1.650, 0.650, 0.940);
     }
     section.gallery.s-150 figure b u a {
         box-shadow: 0 0 0px 0px #ffffff00;
 
         transform: translateY(0px) rotate(0deg);
 
-        transition-duration: .2s;
+        transition-duration: .4s;
+        transition-timing-function: cubic-bezier(0.300, 1.650, 0.650, 0.940);
     }
 
     section.gallery.s-150 figure:not(.active) b u a:hover {
@@ -321,15 +392,16 @@
 
         transform: translateY(-7px) rotate(-1deg);
 
-        transition-duration: .2s;
+        transition-duration: .4s;
+        transition-timing-function: cubic-bezier(0.300, 1.650, 0.650, 0.940);
     }
 }
 
-@-moz-document domain("furaffinity.net") {
+@-moz-document domain("www.furaffinity.net") {
     /* Styling body */
     html,
     body {
-        background-image: url('https://www.nitrome.com/generated-content/images/icebreakerupdate/tile.png');
+        background-image: var(--background-image);
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center center;
@@ -345,7 +417,9 @@
     }
 
     /* Sections */
-    section:not(.gallery) {
+    section:not(.gallery),
+    div#comments-journal,
+    .comments-list {
         border: none;
 
         /*border: 2px solid black;*/
@@ -567,6 +641,11 @@
             padding-top: 50px;
         }
     }
+    @media screen and (min-width: 800px) and (max-width: 1099px) {
+        site-banner img {
+            object-fit: cover;
+        }
+    }
 
     .section-submission,
     .submission-preview,
@@ -600,13 +679,18 @@
         box-shadow: none;
         border: none;
     }
+    
+    .latest-journals {
+        margin: 0 !important;
+    }
 }
 
-@-moz-document domain("furaffinity.net") {
+@-moz-document domain("www.furaffinity.net") {
     /* Buttons */
     .align-options-header.section_controls > button,
     .align-options-header.global_controls > button,
-    #pageid-submission .submission-sidebar .buttons div {
+    #pageid-submission .submission-sidebar .buttons div,
+    .aligncenter.auto_link.hideonfull1.favorite-nav a {
         border: none;
         border-radius: var(--section-rounding);
 
@@ -619,19 +703,22 @@
 
         box-shadow: 0px 0px 0px 0px var(--inner-shadow-color);
 
-        transition-duration: .2s;
+        transition-duration: .4s;
+        transition-timing-function: cubic-bezier(0.300, 1.650, 0.650, 0.940);
     }
     .align-options-header.section_controls > button:hover,
     .align-options-header.global_controls > button:hover,
-    #pageid-submission .submission-sidebar .buttons div:hover {
+    #pageid-submission .submission-sidebar .buttons div:hover,
+    .aligncenter.auto_link.hideonfull1.favorite-nav a:hover {
         background: var(--body-color) !important;
         
-        transform: translateY(-3px) rotate(-1deg);
-        box-shadow: 0px 4px 0px 0px var(--inner-shadow-color);
+        transform: translateY(-4px) rotate(-2deg);
+        box-shadow: -4px 4px 0px 0px var(--inner-shadow-color);
     }
     .align-options-header.section_controls > button:active,
     .align-options-header.global_controls > button:active,
-    #pageid-submission .submission-sidebar .buttons div:active {
+    #pageid-submission .submission-sidebar .buttons div:active,
+    .aligncenter.auto_link.hideonfull1.favorite-nav a:active {
         background: var(--body-color);
         
         transition-duration: 0s;
@@ -671,11 +758,15 @@
     #pageid-submission .submission-sidebar .buttons div {
         background: var(--header-color);
     }
+    
     #pageid-submission .submission-sidebar .buttons div a {
         color: var(--header-text-color) !important;
     }
+     #pageid-submission .submission-sidebar .buttons div:hover {
+        background: var(--header-color) !important;
+    }
     #pageid-submission .submission-sidebar .buttons div a:hover {
-        color: var(--header-color) !important;
+        color: var(--header-text-color) !important;
         transition-duration: .2s;
     }
     
@@ -693,12 +784,13 @@
         padding-left: 10px;
         padding-right: 8px;
         
-        transition-duration: .2s;
+        transition-duration: .3s;
+        transition-timing-function: cubic-bezier(0.300, 1.650, 0.650, 0.940);
         
         position: relative;
     }
     .tags:hover {
-        transform: translate(0, -2px) rotate(-3deg) !important;
+        transform: translate(0, -3px) rotate(-3deg) !important;
         transform-origin: left;
     }
     .tags a {
@@ -731,8 +823,15 @@
     }
 }
 
-@-moz-document domain("furaffinity.net") {
+@-moz-document domain("www.furaffinity.net") {
     /* Comments */
+    #comments-journal,
+    .comments-list {
+        background: var(--body-layer);
+        margin: 0 10px;
+        padding: 10px;
+    }
+    
     .comment_container comment-container {
         border: none;
 
@@ -742,11 +841,24 @@
     comment-container .comment-content {
         background-color: var(--body-color);
         border-radius: var(--section-rounding);
-        z-index: 1;
+        
+        box-shadow: var(--shadow-distance) 0px 0px var(--inner-shadow-color);
+    }
+    comment-container .avatar:before {
+        content: "";
+        background: var(--body-color);
+        z-index: 2;
+        
+        width: 80px;
+        height: 80px;
+        
+        transform: translate(70px, 27px);
+        
+        position: absolute;
     }
 
     comment-container .comment-content > * {
-        z-index: 1;
+        z-index: 1000000;
     }
 
     comment-container .avatar {
@@ -758,8 +870,6 @@
         justify-content: left;
 
         min-width: 64px;
-
-        z-index: 1;
     }
     comment-container .avatar:after {
         font-family: "Font Awesome 5 Free";
@@ -769,21 +879,31 @@
         font-size: 80px;
 
         transform: translate(-10px, 20px) rotate(58deg);
-        z-index: 1;
 
         pointer-events: none;
 
-        left: 0;
-
         color: var(--body-color);
+        
+        text-shadow: 4px 4px var(--inner-shadow-color);
     }
 
     .comment_useravatar {
-        box-shadow: none !important;
+        box-shadow: var(--shadow-distance) 0px 0px var(--inner-shadow-color) !important;
         border-radius: var(--section-rounding) !important;
     }
     comment-container .avatar a img {
         max-width: 64px;
+    }
+    comment-container .avatar a {
+        height: fit-content;
+    }
+    
+    comment-container .avatar a {
+        transition-duration: .4s;
+        transition-timing-function: cubic-bezier(0.300, 1.650, 0.650, 0.940);
+    }
+     comment-container .avatar a:hover {
+        transform: translateY(-5px) rotate(-2deg) scale(1.05);
     }
 
     comment-container .comment-content comment-title {
@@ -801,7 +921,7 @@
     }
 }
 
-@-moz-document domain("furaffinity.net") {
+@-moz-document domain("www.furaffinity.net") {
     /* Art Page */
     #submission_page #submissionImg {
         max-height: 93vh;
@@ -862,7 +982,7 @@
     }
 }
 
-@-moz-document domain("furaffinity.net") {
+@-moz-document domain("www.furaffinity.net") {
     /* Main page gallery */
     section.gallery b figcaption {
         top: auto;
@@ -905,7 +1025,7 @@
     }
 }
 
-@-moz-document domain("furaffinity.net") {
+@-moz-document domain("www.furaffinity.net") {
     /* Lightbox */
     .lightbox {
         overflow: auto;

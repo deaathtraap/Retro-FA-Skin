@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Retro FA Userscript
 // @namespace    furaffinity.net/user/deaathraap
-// @version      1.1
+// @version      1.3.0
 // @description  For use in conjunction with the Retro FA theme.
 // @match        https://www.furaffinity.net/*
 // @grant        none
@@ -10,6 +10,8 @@
 
 (function() {
     'use strict';
+
+    let isScrollDisabled = false;
 
     // Function to remove the last letter from divs with class "notification-container inline"
     function removeLastLetterFromNotifications() {
@@ -137,6 +139,23 @@
         if (imageElement) {
             applyStylesToImage(imageElement);
         }
+
+        // Disable scrolling when .lightbox is created
+        if (!isScrollDisabled) {
+            document.documentElement.style.setProperty ("overflow-Y", "hidden", "important");
+            isScrollDisabled = true;
+            console.log('Lightbox opened, Overflow hidden');
+        }
+    }
+
+    // Function to be executed when a .lightbox element is removed
+    function handleLightboxRemoval() {
+        // Enable scrolling when .lightbox is removed
+        if (isScrollDisabled) {
+            document.documentElement.style.setProperty ("overflow-Y", "auto");
+            isScrollDisabled = false;
+            console.log('Lightbox closed, Overflow auto');
+        }
     }
 
     // Create a MutationObserver to watch for changes in the DOM
@@ -148,6 +167,12 @@
                 const addedLightboxes = Array.from(mutation.addedNodes).filter(node => node.matches && node.matches('.lightbox'));
                 for (const lightbox of addedLightboxes) {
                     handleLightboxCreation(lightbox);
+                }
+
+                // Check if a node was removed
+                const removedLightboxes = Array.from(mutation.removedNodes).filter(node => node.matches && node.matches('.lightbox'));
+                for (const lightbox of removedLightboxes) {
+                    handleLightboxRemoval(lightbox);
                 }
             }
         }
